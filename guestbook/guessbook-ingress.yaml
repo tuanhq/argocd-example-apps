@@ -4,9 +4,11 @@ metadata:
   name: guestbook-ingress
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
 spec:
+  ingressClassName: nginx
   rules:
-  - host: guestbook.mydomain.com
+  - host: guess-book.aliuni.xyz
     http:
       paths:
       - path: /
