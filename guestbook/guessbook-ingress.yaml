@@ -3,7 +3,18 @@ kind: Ingress
 metadata:
   name: guestbook-ingress
   annotations:
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      more_set_headers "X-Content-Type-Options: nosniff";
+      proxy_set_header nginx-request-id $request_id;
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "*"
+    nginx.ingress.kubernetes.io/cors-allow-methods: "PUT, GET, POST, OPTIONS, DELETE"
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/client-max-body-size: 20m
+    nginx.ingress.kubernetes.io/proxy-body-size: 20m
+    ingress.kubernetes.io/client-max-body-size: 20m
+    ingress.kubernetes.io/proxy-body-size: 20m
 spec:
   ingressClassName: nginx
   rules:
